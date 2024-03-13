@@ -1,24 +1,24 @@
 let playerSelection;
-let computerSelection = getComputerChoice();
-
+let computerSelection;
 let result;
-console.log(playRound(playerSelection, computerSelection));
+
 
 //Generate Computer Guess
 function getComputerChoice() {
-    let randomNumber = Math.floor(Math.random() * 300) + 3;
-    if (randomNumber <= 100) {
+    let randomNumber = Math.floor(Math.random() * 3) + 1;
+    if (randomNumber == 1) {
         return "rock";
     }
-    else if (randomNumber <= 200) {
+    else if (randomNumber == 2) {
         return "paper";
     }
-    else if (randomNumber >= 201) {
+    else if (randomNumber == 3) {
         return "scissors";
 }   }
 
 //Plays a round of the game and returns the result
-function playRound(playerSelection, computerSelection) {
+function playRound(playerSelection) {
+    computerSelection = getComputerChoice();
     playerSelection = prompt("Which do you choose. Rock, Paper, or Scissors?").toLowerCase();
     if (playerSelection === "rock") {
         if (computerSelection === "paper") {
@@ -55,17 +55,17 @@ function playGame() {
         if (result === "You win! Scissors cuts paper."
         || result === "You win! Paper covers Rock."
         || result === "You win! Rock smashes Scissors.") {
-            console.log("You win!");
+            console.log(result);
             playerWins += 1;
         } else if (result === "You lose! Rock crushes Scissors."
         || result === "You lose! Scissors cuts Paper." 
         || result === "You lose! Paper covers Rock.") {
-            console.log("You lose!");
+            console.log(result);
             computerWins += 1;
         } else if (result === "You tie! You both picked Scissors."
         || result === "You tie! You both picked Paper."
         || result === "You tie! You both picked Rock.") {
-            console.log("You tied!");
+            console.log(result);
             tie += 1;
         }
         
@@ -78,3 +78,4 @@ function playGame() {
         console.log(`You tied! You won ${playerWins} rounds. The computer won ${computerWins} rounds and yall tied ${tie} rounds.`)
     }
 }   
+
