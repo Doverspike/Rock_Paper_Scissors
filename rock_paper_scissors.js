@@ -1,3 +1,9 @@
+let playerSelection;
+let computerSelection = getComputerChoice();
+
+let result;
+console.log(playRound(playerSelection, computerSelection));
+
 //Generate Computer Guess
 function getComputerChoice() {
     let randomNumber = Math.floor(Math.random() * 300) + 3;
@@ -9,9 +15,11 @@ function getComputerChoice() {
     }
     else if (randomNumber >= 201) {
         return "scissors";
-    }
-}
+}   }
+
+//Plays a round of the game and returns the result
 function playRound(playerSelection, computerSelection) {
+    playerSelection = prompt("Which do you choose. Rock, Paper, or Scissors?").toLowerCase();
     if (playerSelection === "rock") {
         if (computerSelection === "paper") {
             return "You lose! Paper covers Rock.";
@@ -35,11 +43,38 @@ function playRound(playerSelection, computerSelection) {
             return "You win! Scissors cuts paper.";
         } else if (computerSelection === "scissors") {
             return "You tie! You both picked Scissors.";
+}   }  }
+
+//Plays 5 rounds of playRound and keeps score. Then outputs the score in the console log
+function playGame() {
+    let playerWins = 0;
+    let computerWins = 0;
+    let tie = 0;
+    for (let i = 0; i < 5; i++) {
+        let result = playRound(playerSelection, computerSelection);
+        if (result === "You win! Scissors cuts paper."
+        || result === "You win! Paper covers Rock."
+        || result === "You win! Rock smashes Scissors.") {
+            console.log("You win!");
+            playerWins += 1;
+        } else if (result === "You lose! Rock crushes Scissors."
+        || result === "You lose! Scissors cuts Paper." 
+        || result === "You lose! Paper covers Rock.") {
+            console.log("You lose!");
+            computerWins += 1;
+        } else if (result === "You tie! You both picked Scissors."
+        || result === "You tie! You both picked Paper."
+        || result === "You tie! You both picked Rock.") {
+            console.log("You tied!");
+            tie += 1;
         }
+        
     }
-
-}
-
-const playerSelection = "rock";
-const computerSelection = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection))
+    if (playerWins > computerWins) {
+        console.log(`You won! You won ${playerWins} rounds. The computer won ${computerWins} rounds and yall tied ${tie} rounds.`);
+    } else if (playerWins < computerWins) {
+        console.log(`You lost! You won ${playerWins} rounds. The computer won ${computerWins} rounds and yall tied ${tie} rounds.`)
+    } else if (playerWins === computerWins) {
+        console.log(`You tied! You won ${playerWins} rounds. The computer won ${computerWins} rounds and yall tied ${tie} rounds.`)
+    }
+}   
