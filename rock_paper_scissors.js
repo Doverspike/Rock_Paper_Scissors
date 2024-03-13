@@ -1,8 +1,3 @@
-let playerSelection;
-let computerSelection;
-let result;
-
-
 //Generate Computer Guess
 function getComputerChoice() {
     let randomNumber = Math.floor(Math.random() * 3) + 1;
@@ -17,9 +12,9 @@ function getComputerChoice() {
 }   }
 
 //Plays a round of the game and returns the result
-function playRound(playerSelection) {
+function playRound() {
     computerSelection = getComputerChoice();
-    playerSelection = prompt("Which do you choose. Rock, Paper, or Scissors?").toLowerCase();
+    let playerSelection = prompt("Which do you choose. Rock, Paper, or Scissors?").toLowerCase();
     if (playerSelection === "rock") {
         if (computerSelection === "paper") {
             return "You lose! Paper covers Rock.";
@@ -51,7 +46,7 @@ function playGame() {
     let computerWins = 0;
     let tie = 0;
     for (let i = 0; i < 5; i++) {
-        let result = playRound(playerSelection, computerSelection);
+        let result = playRound();
         if (result === "You win! Scissors cuts paper."
         || result === "You win! Paper covers Rock."
         || result === "You win! Rock smashes Scissors.") {
