@@ -10,67 +10,120 @@ function getComputerChoice() {
     else if (randomNumber == 3) {
         return "scissors";
 }   }
+let playerScore = 0;
+let computerScore = 0;
+let tieScore = 0;
+let alerted = 0;
+let winner = "";
+const rock = document.querySelector("#rock");
+const paper = document.querySelector("#paper");
+const scissors = document.querySelector("#scissors");
+const reset = document.querySelector("#reset");
+rock.addEventListener('click', () => {
+    playRound('rock')
+});
+paper.addEventListener('click', () => {
+    playRound('paper')
+});
+scissors.addEventListener('click', () => {
+    playRound('scissors')
+});
+reset.addEventListener('click', () => {
+    resetGame()
+});
+
+const par = document.createElement('p');
+const divScore = document.querySelector("#score");
+par.textContent = `Player Score: ${playerScore}. Computer Score: ${computerScore}. Ties ${tieScore}.`;
+divScore.appendChild(par);
+
 
 //Plays a round of the game and returns the result
-function playRound() {
+function playRound(playerSelection) {
     computerSelection = getComputerChoice();
-    let playerSelection = prompt("Which do you choose. Rock, Paper, or Scissors?").toLowerCase();
-    if (playerSelection === "rock") {
+    if (computerScore  === 5) {
+        window.alert("You lost! Better luck next time. Reset the game to try again!");
+        alerted++;
+    } else if (playerScore === 5) {
+        window.alert("You won! Congratulations! Reset the game to go again!");
+        alerted++;
+    } else if (playerSelection === "rock") {
         if (computerSelection === "paper") {
-            return "You lose! Paper covers Rock.";
+             computerScore++;
         } else if (computerSelection === "scissors") {
-            return "You win! Rock smashes Scissors.";
+             playerScore++;
         } else if (computerSelection === "rock") {
-            return "You tie! You both picked Rock."
+             tieScore++;
         }
     } else if (playerSelection === "paper") {
         if (computerSelection === "rock") {
-            return "You win! Paper covers Rock.";
+             playerScore++;
         } else if (computerSelection === "paper") {
-            return "You tie! You both picked Paper.";
+             tieScore++;
         } else if (computerSelection === "scissors") {
-            return "You lose! Scissors cuts Paper.";
+             computerScore++;
         }
     } else if (playerSelection === "scissors") {
         if (computerSelection === "rock") {
-            return "You lose! Rock crushes Scissors.";
+             computerScore++;
         } else if (computerSelection === "paper") {
-            return "You win! Scissors cuts paper.";
+             playerScore++;
         } else if (computerSelection === "scissors") {
-            return "You tie! You both picked Scissors.";
-}   }  }
+             tieScore++;
+}   }  
+    par.textContent = `Player Score: ${playerScore}. Computer Score: ${computerScore}. Ties ${tieScore}.`;
+    if (computerScore === 5 && alerted < 1) {
+        winner = document.createElement('p')
+        winner.textContent = "You Lose! Better luck next time. Hit reset to try again!"
+        divScore.appendChild(winner);
+        par.textContent = `Player Score: ${playerScore}. Computer Score: ${computerScore}. Ties ${tieScore}.`;
+    } else if (playerScore === 5 && alerted < 1) {
+        winner = document.createElement('p')
+        winner.textContent = "You Win! Congratulations!. Hit reset to try again!"
+        divScore.appendChild(winner);
+    }
+}
+
+function resetGame() {
+    computerScore = 0;
+    playerScore = 0;
+    tieScore = 0;
+    par.textContent = `Player Score: ${playerScore}. Computer Score: ${computerScore}. Ties ${tieScore}.`;
+    divScore.appendChild(par);
+    divScore.removeChild(winner);
+}
 
 //Plays 5 rounds of playRound and keeps score. Then outputs the score in the console log
-function playGame() {
-    let playerWins = 0;
-    let computerWins = 0;
-    let tie = 0;
-    for (let i = 0; i < 5; i++) {
-        let result = playRound();
-        if (result === "You win! Scissors cuts paper."
-        || result === "You win! Paper covers Rock."
-        || result === "You win! Rock smashes Scissors.") {
-            console.log(result);
-            playerWins += 1;
-        } else if (result === "You lose! Rock crushes Scissors."
-        || result === "You lose! Scissors cuts Paper." 
-        || result === "You lose! Paper covers Rock.") {
-            console.log(result);
-            computerWins += 1;
-        } else if (result === "You tie! You both picked Scissors."
-        || result === "You tie! You both picked Paper."
-        || result === "You tie! You both picked Rock.") {
-            console.log(result);
-            tie += 1;
-        }
-        
-    }
-    if (playerWins > computerWins) {
-        console.log(`You won! You won ${playerWins} rounds. The computer won ${computerWins} rounds and yall tied ${tie} rounds.`);
-    } else if (playerWins < computerWins) {
-        console.log(`You lost! You won ${playerWins} rounds. The computer won ${computerWins} rounds and yall tied ${tie} rounds.`)
-    } else if (playerWins === computerWins) {
-        console.log(`You tied! You won ${playerWins} rounds. The computer won ${computerWins} rounds and yall tied ${tie} rounds.`)
-    }
-}   
+//function playGame() {
+  //  let playerWins = 0;
+  //  let computerWins = 0;
+  //  let tie = 0;
+  //  for (let i = 0; i < 5; i++) {
+  //      let result = playRound();
+  //      if (result === "You win! Scissors cuts paper."
+  //      || result === "You win! Paper covers Rock."
+  //      || result === "You win! Rock smashes Scissors.") {
+  //          console.log(result);
+  //          playerWins += 1;
+  //      } else if (result === "You lose! Rock crushes Scissors."
+  //      || result === "You lose! Scissors cuts Paper." 
+  //      || result === "You lose! Paper covers Rock.") {
+  //          console.log(result);
+  //          computerWins += 1;
+  //      } else if (result === "You tie! You both picked Scissors."
+  //      || result === "You tie! You both picked Paper."
+  //      || result === "You tie! You both picked Rock.") {
+  //          console.log(result);
+  //          tie += 1;
+  //      }
+  //      
+  //  }
+  //  if (playerWins > computerWins) {
+  //      console.log(`You won! You won ${playerWins} rounds. The computer won ${computerWins} rounds and yall tied ${tie} rounds.`);
+  //  } else if (playerWins < computerWins) {
+  //      console.log(`You lost! You won ${playerWins} rounds. The computer won ${computerWins} rounds and yall tied ${tie} rounds.`)
+  //  } else if (playerWins === computerWins) {
+  //      console.log(`You tied! You won ${playerWins} rounds. The computer won ${computerWins} rounds and yall tied ${tie} rounds.`)
+  //  }
+//}   
 
