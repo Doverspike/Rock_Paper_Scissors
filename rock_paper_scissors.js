@@ -92,38 +92,3 @@ function resetGame() {
     divScore.appendChild(par);
     divScore.removeChild(winner);
 }
-
-//Plays 5 rounds of playRound and keeps score. Then outputs the score in the console log
-//function playGame() {
-  //  let playerWins = 0;
-  //  let computerWins = 0;
-  //  let tie = 0;
-  //  for (let i = 0; i < 5; i++) {
-  //      let result = playRound();
-  //      if (result === "You win! Scissors cuts paper."
-  //      || result === "You win! Paper covers Rock."
-  //      || result === "You win! Rock smashes Scissors.") {
-  //          console.log(result);
-  //          playerWins += 1;
-  //      } else if (result === "You lose! Rock crushes Scissors."
-  //      || result === "You lose! Scissors cuts Paper." 
-  //      || result === "You lose! Paper covers Rock.") {
-  //          console.log(result);
-  //          computerWins += 1;
-  //      } else if (result === "You tie! You both picked Scissors."
-  //      || result === "You tie! You both picked Paper."
-  //      || result === "You tie! You both picked Rock.") {
-  //          console.log(result);
-  //          tie += 1;
-  //      }
-  //      
-  //  }
-  //  if (playerWins > computerWins) {
-  //      console.log(`You won! You won ${playerWins} rounds. The computer won ${computerWins} rounds and yall tied ${tie} rounds.`);
-  //  } else if (playerWins < computerWins) {
-  //      console.log(`You lost! You won ${playerWins} rounds. The computer won ${computerWins} rounds and yall tied ${tie} rounds.`)
-  //  } else if (playerWins === computerWins) {
-  //      console.log(`You tied! You won ${playerWins} rounds. The computer won ${computerWins} rounds and yall tied ${tie} rounds.`)
-  //  }
-//}   
-
